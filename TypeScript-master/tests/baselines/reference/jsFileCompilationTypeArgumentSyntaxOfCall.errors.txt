@@ -1,0 +1,19 @@
+tests/cases/compiler/a.jsx(1,5): error TS8011: 'type arguments' can only be used in a .ts file.
+tests/cases/compiler/a.jsx(2,5): error TS8011: 'type arguments' can only be used in a .ts file.
+tests/cases/compiler/a.jsx(3,6): error TS8011: 'type arguments' can only be used in a .ts file.
+tests/cases/compiler/a.jsx(4,6): error TS8011: 'type arguments' can only be used in a .ts file.
+
+
+==== tests/cases/compiler/a.jsx (4 errors) ====
+    Foo<number>();
+        ~~~~~~
+!!! error TS8011: 'type arguments' can only be used in a .ts file.
+    Foo<number>``;
+        ~~~~~~
+!!! error TS8011: 'type arguments' can only be used in a .ts file.
+    <Foo<number>></Foo>;
+         ~~~~~~
+!!! error TS8011: 'type arguments' can only be used in a .ts file.
+    <Foo<number>/>;
+         ~~~~~~
+!!! error TS8011: 'type arguments' can only be used in a .ts file.
