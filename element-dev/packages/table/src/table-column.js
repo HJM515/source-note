@@ -8,7 +8,7 @@ export default {
   name: 'ElTableColumn',
 
   props: {
-    type: {
+    type: { // selection/index/expand
       type: String,
       default: 'default'
     },
@@ -36,19 +36,19 @@ export default {
     showTooltipWhenOverflow: Boolean, // 官方文档没有这个属性
     showOverflowTooltip: Boolean,
     fixed: [Boolean, String],
-    formatter: Function,
-    selectable: Function,
-    reserveSelection: Boolean,
+    formatter: Function, 
+    selectable: Function, // (row, index) => {} 是否可勾选
+    reserveSelection: Boolean, // 更新后是够保留之前选中的数据, 需要指定row-key
     filterMethod: Function,
-    filteredValue: Array,
+    filteredValue: Array, //自定义表头过滤的渲染方式
     filters: Array,
     filterPlacement: String,
-    filterMultiple: {
+    filterMultiple: { //数据过滤是否多选
       type: Boolean,
       default: true
     },
-    index: [Number, Function],
-    sortOrders: {
+    index: [Number, Function], //type=index, 自定义索引
+    sortOrders: { //排序策略的轮转顺序
       type: Array,
       default() {
         return ['ascending', 'descending', null];
@@ -69,7 +69,7 @@ export default {
   computed: {
     owner() {
       let parent = this.$parent;
-      while (parent && !parent.tableId) {
+      while (parent && !parent.tableId) { // tableId, 表格的标识!?
         parent = parent.$parent;
       }
       return parent;
@@ -247,7 +247,7 @@ export default {
   beforeCreate() {
     this.row = {};
     this.column = {};
-    this.$index = 0;
+    this.$index = 0; //hjm: table-column的作用域插槽scope有前三个属性
     this.columnId = '';
   },
 
@@ -284,7 +284,7 @@ export default {
     const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
 
     let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
-    column = mergeOptions(defaults, column);
+    column = mergeOptions(defaults, column)
 
     // 注意 compose 中函数执行的顺序是从右到左
     const chains = compose(this.setColumnRenders, this.setColumnWidth, this.setColumnForcedProps);
@@ -300,6 +300,7 @@ export default {
   mounted() {
     const owner = this.owner;
     const parent = this.columnOrTableParent;
+    // Vue实例的挂载点(DOM元素), 所有挂载的元素会被vue生成的DOM替换
     const children = this.isSubColumn ? parent.$el.children : parent.$refs.hiddenColumns.children;
     const columnIndex = this.getColumnElIndex(children, this.$el);
 
@@ -313,6 +314,7 @@ export default {
   },
 
   render(h) {
+    // hjm: render函数存在, 就不会将tempate选项或el选项指定的挂载元素 提取html模板编译渲染函数
     // slots 也要渲染，需要计算合并表头
     return h('div', this.$slots.default);
   }
