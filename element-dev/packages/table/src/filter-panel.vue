@@ -184,7 +184,7 @@
       });
     },
     watch: {
-      showPopper(val) {
+      showPopper(val) { // showPopper属性没有在data\computed\props中定义??? 如和监听,而且还是两次
         if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
           this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
