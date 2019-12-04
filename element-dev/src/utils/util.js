@@ -26,7 +26,7 @@ export function toObject(arr) {
   return res;
 };
 
-export const getValueByPath = function(object, prop) {
+export const getValueByPath = function(object, prop) { // ??? 这是什么意思呀?
   prop = prop || '';
   const paths = prop.split('.');
   let current = object;

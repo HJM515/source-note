@@ -72,7 +72,7 @@ export default {
     }),
 
     firstDefaultColumnIndex() {
-      return arrayFindIndex(this.columns, ({ type }) => type === 'default');
+      return arrayFindIndex(this.columns, ({ type }) => type === 'default'); // { type } 用到了解构赋值
     }
   },
 

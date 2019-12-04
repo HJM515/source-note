@@ -111,9 +111,9 @@ export const getRowIdentity = (row, rowKey) => {
       return row[rowKey];
     }
     let key = rowKey.split('.');
-    let current = row;
+    let current = row; // 重新赋值可以, 增加或修改属性会影响row
     for (let i = 0; i < key.length; i++) {
-      current = current[key[i]];
+      current = current[key[i]]; // 如 activity.id
     }
     return current;
   } else if (typeof rowKey === 'function') {
@@ -149,7 +149,7 @@ export function mergeOptions(defaults, config) {
   }
   return options;
 }
-
+//----------2019/12/04-----------
 export function parseWidth(width) {
   if (width !== undefined) {
     width = parseInt(width, 10);
