@@ -1,17 +1,17 @@
 {
-  "globals": {
-    "ga": true,
-    "chrome": true
+  "globals": { // 全局变量 可禁用全局变量，如 Promise: 'off'
+    "ga": true, // 设置全局变量的属性，如 ga: 'writable' 或 ‘ga’: 'readonly'
+    "chrome": true // 自定义全局变量，true相当于writable, false相当于readonly
   },
-  "plugins": ["html", "json"],
-  "extends": "elemefe",
+  "plugins": ["html", "json"], // 第三方插件：eslint-plugin-html、eslint-plugin-json, 前缀eslint-plugin-可省略
+  "extends": "elemefe", // eslint-config-elemefe
   "rules": {
-    "no-restricted-globals": ["error", "event", "fdescribe"]
+    "no-restricted-globals": ["error", "event", "fdescribe"] // 不希望在应用程序中使用的全局变量
   },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
+  "parserOptions": { // 语法分析配置项
+    "ecmaVersion": 6, // 支持ES6语法
+    "ecmaFeatures": { // 额外的语言特性
+      "jsx": true // 启用JSX
     }
   }
-}
+} // .eslintrc配置文件，官方文档显示 弃用 优先使用.eslintrc.js/yaml/yml/json 或 package.json中创建eslintConfig属性

@@ -10,7 +10,7 @@ const getAllColumns = (columns) => {
   columns.forEach((column) => {
     if (column.children) {
       result.push(column);
-      result.push.apply(result, getAllColumns(column.children));
+      result.push.apply(result, getAllColumns(column.children)); //递归形成树形结构
     } else {
       result.push(column);
     }
@@ -172,7 +172,7 @@ export default {
       return this.$parent;
     },
 
-    hasGutter() {
+    hasGutter() { // ??? 这个属性具体是什么意思呢？没看懂
       return !this.fixed && this.tableLayout.gutterWidth;
     },
 

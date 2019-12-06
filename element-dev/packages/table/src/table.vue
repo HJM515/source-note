@@ -262,7 +262,7 @@
 
       border: Boolean,
 
-      rowKey: [String, Function],
+      rowKey: [String, Function], //行数据的key, 优化table的渲染， 使用reserve-selection和树形时必填
 
       context: {},
 
@@ -273,11 +273,11 @@
 
       showSummary: Boolean,
 
-      sumText: String,
+      sumText: String, //合并行第一列的数据 默认 ‘合并’
 
       summaryMethod: Function,
 
-      rowClassName: [String, Function],
+      rowClassName: [String, Function], //function({row, rowIndex}) / string  给特定行设置className 或 给所有行设置固定的className
 
       rowStyle: [Object, Function],
 
@@ -299,7 +299,7 @@
 
       emptyText: String,
 
-      expandRowKeys: Array,
+      expandRowKeys: Array, //table目前展开行，设置了row-key才能使用
 
       defaultExpandAll: Boolean,
 
@@ -307,7 +307,7 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function,
+      spanMethod: Function, //合并行或列的计算方法
 
       selectOnIndeterminate: {
         type: Boolean,
@@ -600,7 +600,7 @@
       },
 
       currentRowKey: {
-        immediate: true,
+        immediate: true, //立即以表达式的当前值执行回调？ 为什么要立即执行呢，有什么区别呢？
         handler(value) {
           if (!this.rowKey) return;
           this.store.setCurrentRowKey(value);

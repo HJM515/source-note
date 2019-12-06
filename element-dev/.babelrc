@@ -3,16 +3,16 @@
     [
       "env",
       {
-        "loose": true,
-        "modules": false,
-        "targets": {
+        "loose": true, // 允许此预设中任何插件启用“松散”
+        "modules": false, // ES6模块语法转换 不转换 【default 'commonjs'】
+        "targets": { // 支持的运行环境配置
           "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
         }
       }
     ],
-    "stage-2"
+    "stage-2" // 按阶段的官方预设，在babel7中移除
   ],
-  "plugins": ["transform-vue-jsx"],
+  "plugins": ["transform-vue-jsx"], // vue中使用JSX语法
   "env": {
     "utils": {
       "presets": [
@@ -25,7 +25,7 @@
               "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
             }
           }
-        ],
+        ]
       ],
       "plugins": [
         ["module-resolver", {
