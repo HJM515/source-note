@@ -180,7 +180,29 @@
       },
 
       readonly() {
+        /**
+         * 一、官方设置
+         * 1.不带过滤功能，直接返回true
+         * 2.带过滤功能，带多选功能，直接返回true 【因为多选时，这个input不需要输入功能，输入在前面的input】
+         * 3.带过滤功能，不带多选功能，是IE/Edge返回false
+         *   【hjm为什么是IE/Edge直接返回false呢？】
+         *   自答：设置IE或Edge选项框不可见返回true, 聚焦竖线还在但是无法输入内容；【是考虑到会造成误解吗？还是有别的考虑 hjm】
+         *        设置IE或Edge直接返回false,会导致可输入不在选项范围的内容 【目前这样设计，不是会造成更大的误解吗？ hjm】✖
+         * 4.带过滤功能，不带多选功能，不是IE/Edge，选项框可见/不可见返回false/true
+         */
         return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
+
+        /**
+         * 二、issue解决方案（值得商榷）
+         * 1.带过滤功能，直接返回false 【会导致可输入不在选项范围的内容】错
+         * 2.不带过滤功能，带多选功能，直接返回false 【这样设置有问题，第2个input不具有搜索功能，但是可以输入，会造成误解】✖
+         * 3.不带过滤和多选功能，不是IE，直接返回false
+         * 4.不带过滤和多选功能，是IE，选项框可见/不可见返回false/true 【这个是什么鬼？】
+         */
+        // return !(this.filterable || this.multiple || !isIE) && !this.visible //兼容IOS，解决 filterable 点击无法唤出键盘的问题
+
+
+
       },
 
       showClose() {
